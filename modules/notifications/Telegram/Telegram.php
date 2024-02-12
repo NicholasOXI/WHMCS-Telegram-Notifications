@@ -43,6 +43,9 @@ class Telegram implements NotificationModuleInterface
     { // This is used to validate the connection upon enabling the module.
         $message = urlencode("*".$settings['bot_installation_branding']."*\nYou have successfully connected your WHMCS installation.");
         $response = file_get_contents("https://api.telegram.org/bot".$settings['bot_token']."/sendMessage?chat_id=".$settings['bot_conversation_id']."&parse_mode=markdown&text=".$message);
+        if (!$response) {
+            throw new Exception('An error occurred when communicating with Telegram.');
+        }
     }
 
     public function notificationSettings()
