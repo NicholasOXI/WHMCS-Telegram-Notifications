@@ -56,7 +56,7 @@ class Telegram implements NotificationModuleInterface
     }
     
     public function sendNotification(NotificationInterface $notification, $moduleSettings, $notificationSettings)
-    {
+    { // This is the function for sending the actual message, you can personalise this as you wish.
         $message = urlencode("*".$moduleSettings['bot_installation_branding']."*: ".$notification->getTitle()."\n\n".$notification->getMessage()."\n[Launch »](".$notification->getUrl().")");
         $response = file_get_contents("https://api.telegram.org/bot".$moduleSettings['bot_token']."/sendMessage?chat_id=".$moduleSettings['bot_conversation_id']."&parse_mode=markdown&text=".$message);
     }
